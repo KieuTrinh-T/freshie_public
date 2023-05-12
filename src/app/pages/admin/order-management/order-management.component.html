@@ -1,0 +1,50 @@
+<div class="left">
+    <div class="option-container">
+        <!-- <div class="show-option">
+      <label>Hiển thị</label>
+      <mat-form-field>
+          <mat-select [(value)]="limit" (valueChange)="onValueChange()">
+              <mat-option *ngFor="let size of pagesize " [value]="size">
+                  {{size}}
+              </mat-option>
+          </mat-select>
+      </mat-form-field>
+  </div>
+  <div class="filter">
+      <label>Danh mục</label>
+      <mat-form-field>
+          <mat-select [(value)]="category_id" (valueChange)="onValueChange()">
+              <mat-option *ngFor="let category of categories " [value]="category.id">
+                  {{category.name}}
+              </mat-option>
+          </mat-select>
+      </mat-form-field>
+  </div>
+</div> -->
+        <div class="chip">
+            <mat-chip-listbox aria-label="Fish selection">
+                <mat-chip-option *ngFor="let opt of options" (click)="changeChip(opt.value)">{{opt.viewValue}}</mat-chip-option>
+            </mat-chip-listbox>
+        </div>
+        <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center" [selectedIndex]="tabIndex" (selectedTabChange)="changeTab($event)">
+
+            <mat-tab *ngFor="let label of labels" label="{{label}}">
+                <div class="tab-content" *ngFor="let order of dataSource">
+                    <mat-card *ngIf="status=='' || order.status == status" class="infor-item" [routerLink]="order._id">
+                        <mat-card-title>Mã đơn: {{order._id}}</mat-card-title>
+                        <mat-card-content>
+                            <h6>Tổng tiền: {{order.total}}</h6>
+                            <h6>Số loại sản phẩm: {{order.orderItems.length}}</h6>
+                            <h6>Ngày đặt: {{order.date_ordered | date}}</h6>
+                        </mat-card-content>
+                        <mat-card-footer>{{order.status}}</mat-card-footer>
+                        <mat-card-actions>
+                            <button mat-raised-button>Xem chi tiết</button>
+                        </mat-card-actions>
+                    </mat-card>
+                </div>
+
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+    <router-outlet></router-outlet>

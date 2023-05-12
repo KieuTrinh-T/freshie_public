@@ -1,0 +1,49 @@
+<!-- filter session -->
+<div class="container mt-4">
+  <div class="row">
+    <div class="filter-container col-3">
+      <h3>Categories</h3>
+      <mat-form-field style="width: 80%;">
+        <mat-select [(value)]="category_id" (valueChange)="onValueChange()">
+            <mat-option *ngFor="let category of categories " [value]="category.id">
+                {{category.name}}
+            </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <!-- price -->
+      <h3>Price</h3>
+      <form [formGroup]="priceRange" (change)="onValueChange()" style="width: 80%;">
+        <div class="form-group" style=" margin-bottom: 10px;">
+          <input type="number" class="form-control" placeholder="Min" formControlName="priceMin">
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" placeholder="Max" formControlName="priceMax">
+        </div>
+      </form>
+      </div>
+
+      <!-- list product session -->
+      <div class="product-container col-9">
+        <!-- sort session -->
+        <div class="sort-container d-flex justify-content-end">
+        </div>
+        <!-- list product session -->
+        <div class="list-product-container">
+          <ec-list-product [products]="products" (viewDetail)="viewDetail($event)" (addToCart)="addToCart($event)"></ec-list-product>
+        </div>
+        <div class="pagination-div">
+          <ul class="pagination">
+              <li class="{{page>1?'page-item':'page-item disabled'}}"><button mat-icon-button (click)="changePage(-1)"><mat-icon>keyboard_arrow_left</mat-icon></button></li>
+              <li *ngIf="page>1" class="page-item"><button mat-flat-button (click)="changePage(-1)"> {{page-1}}</button></li>
+              <li class="page-item active"><button mat-flat-button>{{page}}</button></li>
+              <li class="page-item"><button mat-flat-button (click)="changePage(1)">{{page+1}}</button></li>
+              <li class="page-item"><button mat-icon-button (click)="changePage(1)"><mat-icon>keyboard_arrow_right</mat-icon></button></li>
+          </ul>
+
+      </div>
+      </div>
+  </div>
+</div>
+
+
+
